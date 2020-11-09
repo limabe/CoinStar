@@ -1,0 +1,81 @@
+Option Strict On
+Public Class Form1
+    Public Sub btnCalc_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnCalc.Click
+        ' Setting value of coins inputted
+        Dim intQ As Integer = CInt(txtQ.Text)
+        Dim intD As Integer = CInt(txtD.Text)
+        Dim intN As Integer = CInt(txtN.Text)
+        Dim intP As Integer = CInt(txtP.Text)
+        Dim valQ As Single = CSng(intQ * 0.25)
+        Dim valD As Single = CSng(intD * 0.1)
+        Dim valN As Single = CSng(intN * 0.05)
+        Dim valP As Single = CSng(intP * 0.01)
+
+        ' Writing total money inputted
+        Dim sngTotal As Single = valQ + valD + valN + valP
+
+        ' Calculate dollar amount
+        Dim finalDlr As Integer = CInt(Math.Floor(sngTotal))
+        txtDlr.Text = finalDlr.ToString
+
+        ' Subtracting total from dollar amount
+        Dim leftQ As Single = Single.Parse(CStr(sngTotal - finalDlr))
+
+        ' Calculate how many quarters
+        Dim finalQ As Integer = 0
+        Do While (leftQ >= 0.25)
+            leftQ = CSng(leftQ - 0.25)
+            finalQ = finalQ + 1
+        Loop
+        Dim leftD As Single = 0
+        leftD = leftQ
+        txtQ2.Text = finalQ.ToString
+
+        ' Calculate how many dimes
+        Dim finalD As Integer = 0
+        Do While (leftD >= 0.1)
+            leftD = CSng(leftD - 0.1)
+            finalD = finalD + 1
+        Loop
+            Dim leftN As Single = 0
+            leftN = leftD
+            txtD2.Text = finalD.ToString
+
+        ' Calculate how many nickels
+        Dim finalN As Integer = 0
+        Do While (leftN >= 0.05)
+            leftN = CSng(leftN - 0.05)
+            finalN = finalN + 1
+        Loop
+
+        Dim leftP As Single = 0
+        leftP = leftN
+        txtN2.Text = finalN.ToString
+
+        ' Calculate how many pennies
+        Dim finalP As Integer = 0
+        While (leftP > 0.00000001)
+            leftP = CSng(leftP - 0.01)
+            finalP = finalP + 1
+        End While
+        txtP2.Text = finalP.ToString
+
+        'Resets values of variables
+        intQ = 0
+        intD = 0
+        intN = 0
+        intP = 0
+    End Sub
+    Private Sub btnReset_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnReset.Click
+        txtQ.Text = "0"
+        txtD.Text = "0"
+        txtN.Text = "0"
+        txtP.Text = "0"
+        txtDlr.Text = ""
+        txtQ2.Text = ""
+        txtD2.Text = ""
+        txtN2.Text = ""
+        txtP2.Text = ""
+    End Sub
+End Class
+
